@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import querystring from "querystring";
 import axios from "axios";
 import { db } from "../../../firebaseAuth";
+import getAccessToken from "@/utility/RefreshToken";
 
 const SPOTIFY_COLLECTION_NAME = "spotify_tokens";
 
@@ -52,7 +53,6 @@ export default async function handler(
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
-
 const fetchUserId = async (access_token: string): Promise<string | null> => {
   try {
     const response = await fetch("https://api.spotify.com/v1/me", {
@@ -86,11 +86,14 @@ const storeSpotifyToken = async (
     const userSnapshot = await userRef.get();
     if (userSnapshot.exists) {
       // update document
-      await userRef.update({
-        access_token,
-        refresh_token,
-        timestamp: new Date(),
-      });
+      const { SPOTIFY_CLIENT_ID } = await parseEnv();
+      const tokendata = await getAccessToken(refresh_token, SPOTIFY_CLIENT_ID);
+      if (tokendata)
+        await userRef.update({
+          refresh_token: tokendata[1],
+          access_token: tokendata[0],
+          timestamp: new Date(),
+        });
     } else {
       // new document
       await db.collection(SPOTIFY_COLLECTION_NAME).doc(userId).set({
