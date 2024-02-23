@@ -10,6 +10,6 @@ export default async function handler(
     if (SPOTIFY_AUTH_URI) res.redirect(SPOTIFY_AUTH_URI);
   } catch (err) {
     console.error(`Error getting Spotify authorization URL: ${err}`);
-    // res.status(500).end();
+    res.status(500).end();
   }
 }

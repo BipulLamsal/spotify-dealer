@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    />
+    <style>
+      :root {
+        --timing: 0.6s;
+        --ease: ease-in;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f2f2f2;
+      }
+
+      .recent-track {
+        width: auto;
+        max-width: 600px; 
+        display: flex;
+        flex-direction: column;
+        background-color: #000000;
+        color: white;
+        padding: 10px 20px;
+      }
+
+      .spotify-heading {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .spotify-heading img {
+        height: 25px;
+      }
+
+      .spotify-heading p {
+        margin-left: 10px;
+        font-weight: 700;
+      }
+
+      .track-container {
+        margin-top: 10px;
+        border-radius: 10px;
+        display: flex;
+        border: 2px solid #0d1117;
+        padding: 10px;
+        align-items: center;
+        padding-top: 15px;
+        background-color: #0d111715;
+      }
+
+      .track-image img {
+        border-radius: 10px;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+      }
+
+      .track-text {
+        margin-left: 20px;
+      }
+
+      .track-text-song {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .track-text-song p {
+        font-weight: 700;
+      }
+
+      .recent-track__icon {
+        width: 18px;
+        height: 14px;
+        position: relative;
+        display: flex;
+      }
+
+      .recent-track__icon span {
+        height: 100%;
+        width: 2px;
+        background: white;
+        transform-origin: bottom;
+        margin: 1px;
+      }
+
+      .recent-track__icon span:nth-child(1) {
+        animation: sound1 var(--timing) infinite var(--ease);
+      }
+
+      .recent-track__icon span:nth-child(2) {
+        animation: sound2 var(--timing) infinite var(--ease);
+      }
+
+      .recent-track__icon span:nth-child(3) {
+        animation: sound3 var(--timing) infinite var(--ease);
+      }
+
+      .recent-track__icon span:nth-child(4) {
+        animation: sound4 var(--timing) infinite var(--ease);
+      }
+
+      @keyframes sound1 {
+        20% {
+          transform: scaleY(0.5);
+        }
+      }
+
+      @keyframes sound2 {
+        40% {
+          transform: scaleY(0.5);
+        }
+      }
+
+      @keyframes sound3 {
+        60% {
+          transform: scaleY(0.5);
+        }
+      }
+
+      @keyframes sound4 {
+        80% {
+          transform: scaleY(0.5);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="recent-track">
+      <div class="spotify-heading">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png"
+        />
+        <p class="title">Now playing</p>
+      </div>
+      <div class="track-container">
+        <div class="track-image">
+          <img
+            src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          />
+        </div>
+        <div class="track-text">
+          <div class="track-text-song">
+            <div class="recent-track__icon">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <p>Buddy Holly</p>
+          </div>
+          <div class="track-artist">
+            <p>Weezer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

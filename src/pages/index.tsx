@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Layout from "../components/Layout";
 import SpotifyImage from "../../public/spotifyicon.png";
-import parseEnv from "../utility/EnvParser";
+// import parseEnv from "../utility/EnvParser";
 import Link from "next/link";
 const Index = () => {
   return (

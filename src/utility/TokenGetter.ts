@@ -9,7 +9,8 @@ export const getSpotifyAuthUrl = async () => {
       querystring.stringify({
         response_type: "code",
         client_id: parsedENV.SPOTIFY_CLIENT_ID,
-        scope: "user-read-private user-read-email",
+        scope:
+          "user-read-private user-read-email user-read-playback-state user-read-recently-played user-read-currently-playing ",
         redirect_uri: parsedENV.SPOTIFY_REDIRECT_URI,
         // state: "state",
       });

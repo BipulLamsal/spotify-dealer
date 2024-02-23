@@ -13,6 +13,8 @@
     "axios": "^1.6.3",
     "firebase": "^8.10.1",
     "next": "14.0.4",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^3.3.2",
     "react": "^18",
     "react-dom": "^18"
   },
