@@ -14,7 +14,6 @@ interface FirestoreData {
   refresh_token: string;
 }
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -22,11 +21,11 @@ export default async function handler(
   try {
     const { uid } = req.query;
     const spotifyData = await fetchSpotifyData(uid as string);
-    const svg = generateSvg(spotifyData);
+    const svg = await generateSvg(spotifyData);
     res.setHeader("Content-Type", "image/svg+xml");
     res.status(200).send(svg);
   } catch (error) {
-    console.error("Error generating SVG:", error);
+    // console.error("Error generating SVG:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
@@ -174,7 +173,7 @@ async function fetchSpotifyData(userId: string) {
         );
     }
 
-    console.error("Error fetching player data:", player.statusText);
+    // console.error("Error fetching player data:", player.statusText);
     throw player.statusText;
     // return {
     //   status: false,

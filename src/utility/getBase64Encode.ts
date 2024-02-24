@@ -1,9 +1,6 @@
-import fetch from "node-fetch";
-
 async function imageUrlToBase64(url: string): Promise<string> {
   try {
     const response = await fetch(url);
-
     const blob = await response.arrayBuffer();
 
     const contentType = response.headers.get("content-type") || "";

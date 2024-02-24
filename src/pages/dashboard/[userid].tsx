@@ -62,7 +62,7 @@ const Dashboard: React.FC<{ accessToken: string }> = ({}) => {
             <div className="">
               {svgContent && (
                 // <div dangerouslySetInnerHTML={{ __html: svgContent }} />
-                <img src=""></img>
+                <img src="http://localhost:3000/api/badge/31bx3nvidhujrgdrzx3xigrgm4wu" className="w-[400px] h-[180px]"></img>
               )}
             </div>
 

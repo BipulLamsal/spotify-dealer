@@ -1,6 +1,13 @@
-export default function generateSvg(spotifyData: any) {
+import imageUrlToBase64 from "./getBase64Encode";
+export default async function generateSvg(spotifyData: any) {
   console.log(spotifyData);
-  const svgCode = `<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-labelledby="cardTitle" role="img">
+  const songImgBase64 = await imageUrlToBase64(spotifyData.song_image);
+  const spotifyImgBase64 = await imageUrlToBase64(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png"
+  );
+
+  try {
+    const svgCode = `<svg width="400px" height="200px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-labelledby="cardTitle" role="img">
   <title id="cardTitle">Now playing on Spotify</title>
   <style>
     :root {
@@ -73,8 +80,8 @@ export default function generateSvg(spotifyData: any) {
   
     .recent-track__icon span {
       height: 100%;
-      width: 2px;
-      background: white;
+      width: 5px;
+      background: #0EE263;
       transform-origin: bottom;
       margin: 1px;
     }
@@ -124,14 +131,14 @@ export default function generateSvg(spotifyData: any) {
     <div xmlns="http://www.w3.org/1999/xhtml" class="recent-track">
       <div class="spotify-heading">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png"
+          src="${spotifyImgBase64}"
         />
         <p class="title">Now playing</p>
       </div>
       <div class="track-container">
         <div class="track-image">
           <img
-            src="${spotifyData.song_image}"
+            src="${songImgBase64}"
           />
         </div>
         <div class="track-text">
@@ -154,5 +161,10 @@ export default function generateSvg(spotifyData: any) {
   </svg>
   
   `;
-  return svgCode;
+    // console.log(svgCode);
+    return svgCode;
+  } catch (err) {
+    console.log(err);
+  }
+  // return {"DATA" : "SDFS"}
 }
