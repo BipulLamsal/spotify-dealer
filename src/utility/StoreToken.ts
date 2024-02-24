@@ -1,7 +1,6 @@
 import getAccessToken from "./RefreshToken";
 const SPOTIFY_COLLECTION_NAME = "spotify_tokens";
 import { db } from "../../firebaseAuth";
-
 const storeSpotifyToken = async (
   userId: string,
   userName: string,

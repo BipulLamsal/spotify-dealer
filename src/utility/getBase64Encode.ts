@@ -15,5 +15,4 @@ async function imageUrlToBase64(url: string): Promise<string> {
     throw new Error("Failed to fetch or convert image to base64");
   }
 }
-
 export default imageUrlToBase64;

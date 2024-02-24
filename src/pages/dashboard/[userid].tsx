@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 const Dashboard: React.FC<{ accessToken: string }> = ({}) => {
   const router = useRouter();
@@ -10,14 +8,18 @@ const Dashboard: React.FC<{ accessToken: string }> = ({}) => {
   const [userName, setUserName] = useState<string | null>(null);
   const [availableStatus, setAvailableStatus] = useState<boolean>(false);
   const [userToken, setUserToken] = useState<string | undefined>(undefined);
-  const [svgContent, setSvgContent] = useState<string | null>(null);
+  const [status_code, setStatusCode] = useState<string>("");
+  const [apiURL, setApiURL] = useState<string | undefined>(
+    process.env.NEXT_PUBLIC_API_URI
+  );
+  const [copyStatus, setCopyStatus] = useState("");
 
   useEffect(() => {
     const fetchUserName = async () => {
       try {
         if (userid) {
           setUserToken(userid as string);
-          const apiUrl = `http://localhost:3000/api/user?userId=${userid}`;
+          const apiUrl = `${apiURL}api/user?userId=${userid}`;
           const response = await fetch(apiUrl);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -31,21 +33,33 @@ const Dashboard: React.FC<{ accessToken: string }> = ({}) => {
         setAvailableStatus(false);
       }
     };
-    const fetchSVG = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/badge/${userid}`
-        );
-        const fetchedSvgContent = await response.text();
-        setSvgContent(fetchedSvgContent);
-      } catch (err) {
-        console.log(err);
-      }
-    };
 
     fetchUserName();
-    fetchSVG();
   }, [userid]);
+
+  const copyToClipboard = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const button = e.currentTarget;
+    try {
+      if (status_code === "api_url") {
+        await navigator.clipboard.writeText(`${apiURL}api/badge/${userid}`);
+        setTimeout(() => {
+          button.innerText = "Copy API URL";
+        }, 500);
+        button.innerText = "Copied ✨";
+      } else if (status_code === "md_snippet") {
+        await navigator.clipboard.writeText(
+          `![spotify-dealer](${apiURL}api/badge/${userid})`
+        );
+        setTimeout(() => {
+          button.innerText = "Copy MD snippet";
+        }, 500);
+        button.innerText = "Copied ✨";
+      }
+    } catch (err) {
+      console.error("Unable to copy to clipboard", err);
+      setCopyStatus("Error copying to clipboard");
+    }
+  };
 
   return (
     <Layout>
@@ -57,28 +71,35 @@ const Dashboard: React.FC<{ accessToken: string }> = ({}) => {
             </h1>
             <p className="text-zinc-300">
               Maybe I will try with other
-              <span className="font-bold"> themes</span>,
+              <span className="font-bold"> themes </span>,
             </p>
             <div className="">
-              {svgContent && (
-                // <div dangerouslySetInnerHTML={{ __html: svgContent }} />
-                <img src="http://localhost:3000/api/badge/31bx3nvidhujrgdrzx3xigrgm4wu" className="w-[400px] h-[180px]"></img>
-              )}
+              <img
+                src={`${apiURL}api/badge/${userid}`}
+                className="w-[400px] "
+                alt={`Badge for ${userName}`}
+              />
             </div>
 
             <div className="flex flex-wrap w-full gap-2">
-              <Link
-                href="/api/auth"
+              <button
                 className="bg-[#00d351] mt-5 py-2 rounded-lg cursor-pointer flex items-center justify-center gap-4 text-zinc-900 flex-1"
+                onClick={(event) => {
+                  setStatusCode("api_url");
+                  copyToClipboard(event);
+                }}
               >
                 Copy API URL
-              </Link>
-              <Link
-                href="/api/auth"
+              </button>
+              <button
                 className="bg-[#00d351] mt-5 py-2 rounded-lg cursor-pointer flex items-center justify-center gap-4 text-zinc-900 flex-1"
+                onClick={(event) => {
+                  setStatusCode("md_snippet");
+                  copyToClipboard(event);
+                }}
               >
                 Copy MD snippet
-              </Link>
+              </button>
             </div>
           </div>
         )}
