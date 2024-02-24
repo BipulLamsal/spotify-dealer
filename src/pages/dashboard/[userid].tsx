@@ -56,7 +56,7 @@ const Dashboard: React.FC<{ accessToken: string }> = ({}) => {
               hey @{userName}
             </h1>
             <p className="text-zinc-300">
-              Maybe I'll try with other
+              Maybe I will try with other
               <span className="font-bold"> themes</span>,
             </p>
             <div className="">
