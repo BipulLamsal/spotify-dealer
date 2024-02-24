@@ -2,16 +2,18 @@
 
 **spotify-dealer** is a straightforward application designed to showcase your Spotify playing status on the web. It provides a simple authorization process that returns an SVG image, allowing you to display your Spotify activity anywhere you like.
 
-<center>
-![spotify-dealer](https://spotify-dealer.vercel.app/api/badge/31bx3nvidhujrgdrzx3xigrgm4wu)
-</center>
+<div style="display: flex; justify-content: center; align-items: center;">
+![Spotify Dealer](https://spotify-dealer.vercel.app/api/badge/31bx3nvidhujrgdrzx3xigrgm4wu)
+</div>
 
 ## Usage
+
 Simply authorize the application and copy your URL to start showcasing your Spotify activity. [Authorize Me](https://spotify-dealer.vercel.app/ "Authorize Me").
 
 ## Running Locally
 
 Ensure you have a `.env.local` file in the root directory with the following setup as shown in the snippet:
+
 ```
 SPOTIFY_CLIENT_ID = AVAILABLE_OVER_SPOTIFY_DEVELOPER_PORTAL
 SPOTIFY_CLIENT_SECRET = AVAILABLE_OVER_SPOTIFY_DEVELOPER_PORTAL
@@ -30,7 +32,6 @@ pnpm dev
 # or
 bun dev
 ```
-
 
 ## Contributing
 
