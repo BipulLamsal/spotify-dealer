@@ -2,9 +2,7 @@
 
 **spotify-dealer** is a straightforward application designed to showcase your Spotify playing status on the web. It provides a simple authorization process that returns an SVG image, allowing you to display your Spotify activity anywhere you like.
 
-<div style="display: flex; justify-content: center; align-items: center;">
 ![Spotify Dealer](https://spotify-dealer.vercel.app/api/badge/31bx3nvidhujrgdrzx3xigrgm4wu)
-</div>
 
 ## Usage
 
