@@ -133,7 +133,7 @@ export default async function generateSvg(spotifyData: any) {
         <img
           src="${spotifyImgBase64}"
         />
-        <p class="title">Now playing</p>
+        <p class="title">${spotifyData.status?"Now Playing" : "Recently Played"}</p>
       </div>
       <div class="track-container">
         <div class="track-image">
