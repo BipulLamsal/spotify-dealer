@@ -1,22 +1,22 @@
 import querystring from "querystring";
 import parseEnv from "./EnvParser";
+
 export const getSpotifyAuthUrl = async () => {
-  const AUTHORIZE_URI = "https://accounts.spotify.com/authorize?";
   try {
-    const parsedENV = await parseEnv();
-    const AUTHORIZE_QUERY =
-      AUTHORIZE_URI +
-      querystring.stringify({
-        response_type: "code",
-        client_id: parsedENV.SPOTIFY_CLIENT_ID,
-        scope:
-          "user-read-private user-read-email user-read-playback-state user-read-recently-played user-read-currently-playing ",
-        redirect_uri: parsedENV.SPOTIFY_REDIRECT_URI,
-        // state: "state",
-      });
-    return AUTHORIZE_QUERY;
+    const { SPOTIFY_CLIENT_ID, SPOTIFY_REDIRECT_URI } = await parseEnv();
+
+    const AUTHORIZE_URI = "https://accounts.spotify.com/authorize?";
+    const AUTHORIZE_QUERY = querystring.stringify({
+      response_type: "code",
+      client_id: SPOTIFY_CLIENT_ID,
+      scope:
+        "user-read-private user-read-email user-read-playback-state user-read-recently-played user-read-currently-playing",
+      redirect_uri: SPOTIFY_REDIRECT_URI,
+    });
+
+    return `${AUTHORIZE_URI}${AUTHORIZE_QUERY}`;
   } catch (err) {
-    console.log(`Something went wrong, ${err}`);
-    // throw err;
+    console.error(`Error generating Spotify authorization URL: ${err}`);
+    throw err; // Rethrow the error to be handled by the caller or a higher-level error handler
   }
 };
