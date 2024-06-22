@@ -192,3 +192,4 @@ async function fetchSpotifyData(userId: string) {
     // };
   }
 }
+export {fetchSpotifyData}

@@ -13,7 +13,7 @@ export default async function handler(
 ) {
   try {
     const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI } =
-      await parseEnv();
+    await parseEnv();
     const code = req.query?.code ?? null;
     const basicAuth = Buffer.from(
       `${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`
