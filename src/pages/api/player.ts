@@ -1,10 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { fetchSpotifyData } from "./badge/[uid]";
+import cors from "@/utility/Cors";
+
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const corsHandled = cors(req, res);
+  if (corsHandled) return;
   try {
     const { userId } = req.query;
     if (!userId) {
